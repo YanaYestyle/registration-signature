@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  gap: 15px;
+}
+
+.img {
+  min-width: 5rem;
+  max-width: 5rem;
+  object-fit: cover;
+  height: calc(100vh - 3rem);
+  border-radius: 8px 0 0 8px;
+  opacity: 1;
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      opacity: 1 - ($i * 0.15);
+    }
+  }
+  animation: infinity-loop 2.5s infinite linear 1s both;
+}
+
+.active {
+  background: white;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes infinity-loop {
+  from {
+    transform: translateY(10%);
+  }
+  to {
+    transform: translateY(-20%);
+  }
+}

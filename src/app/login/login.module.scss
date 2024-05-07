@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: calc(100vw - 40px);
+  border-radius: 8px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+}
