@@ -1,11 +1,17 @@
+"use client"
 import Slider from "@/components/slider/slider";
 import login from "./login.module.scss";
 import { imageList } from "./imageList";
 import FormLogin from "@/components/form-login/form-login";
 import Button from "@/components/button/button";
 import { FormProvider } from "@/components/form-data-provider/form-data-provider";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const router = useRouter();
+  const goToReservation = () => {
+    router.push("/reservation");
+  };
   return (
     <>
       <div className={login.container}>
@@ -14,7 +20,7 @@ export default function Login() {
           <div className={login.content}>
             <FormProvider>
               <FormLogin>
-                <Button>
+                <Button onClick={goToReservation}>
                   Let's go!
                   <br />
                   Choose your dream vacation
