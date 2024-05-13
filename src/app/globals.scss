@@ -1,5 +1,34 @@
 :root {
+  /** Fonts **/
   --font-family: "Segoe UI";
+
+  /* Font sizes */
+  --font-size-extra-small: 12px;
+  --font-size-small: 12px;
+  --font-size-medium: 14px;
+  --font-size-large: 18px;
+
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Line heights */
+  --line-height-small: 1.2;
+  --line-height-medium: 1.5;
+  --line-height-large: 1.8;
+
+  /** Colors palette **/
+  --primary: #3d969e;
+  --accent: #51702c;
+  --white: #ffffff;
+  --red: #b20000;
+  --dark-blue: #1b5460;
+  --light-blue: #ddded1;
+
+  /** Variables **/
+  --spacing: 20px;
 }
 
 * {
@@ -7,11 +36,11 @@
   padding: 0;
   margin: 0;
   border: 0;
+  font-family: var(--font-family);
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: var(--font-family);
 }

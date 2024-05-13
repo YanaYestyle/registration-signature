@@ -3,7 +3,13 @@ import { useState, useEffect } from "react";
 import slider from "./slider.module.scss";
 import { Image } from "@/types/image";
 
-export default function Slider({ images }: { images: Image[] }) {
+export default function Slider({
+  images,
+  customClassName,
+}: {
+  images: Image[];
+  customClassName: string;
+}) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -18,7 +24,7 @@ export default function Slider({ images }: { images: Image[] }) {
 
   return (
     <>
-      <div className={slider.container}>
+      <div className={`${slider.container} ${customClassName}`}>
         {images.slice(0, 5).map((_image, index) => (
           <img
             className={slider.img}

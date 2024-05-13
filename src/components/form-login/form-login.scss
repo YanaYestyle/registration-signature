@@ -1,0 +1,117 @@
+// Dimensions
+$prism-height: 550px;
+$prism-length: 350px;
+$prism-depth: $prism-length;
+$spacing: 20px;
+$br: 3px;
+
+.form-login-wrapper {
+  width: $prism-length;
+  height: $prism-height;
+  margin: 60px auto;
+  perspective: 600px;
+}
+
+.prism-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-100px);
+  transition: transform 0.5s ease-in;
+}
+
+.face {
+  position: absolute;
+  width: $prism-length;
+  height: $prism-height;
+  padding: $spacing;
+  background: var(--white);
+  border: 3px solid var(--primary);
+  border-radius: 3px;
+
+  .form-login-content {
+    .title-text {
+      font-size: var(--font-size-large);
+      font-weight: var(--font-weight-light);
+      color: var(--primary);
+      text-align: center;
+      text-transform: uppercase;
+      margin: 1rem 0 0;
+    }
+  }
+
+  .thank-you-msg {
+    position: absolute;
+    width: 200px;
+    height: 130px;
+    text-align: center;
+    font-size: 2em;
+    color: var(--primary);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    &:after {
+      position: absolute;
+      content: "";
+      width: 50px;
+      height: 25px;
+      border: 10px solid var(--primary);
+      border-right: 0;
+      border-top: 0;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%) rotate(0deg) scale(0);
+      transform: translate(-50%, -50%) rotate(0deg) scale(0);
+      -webkit-animation: success ease-in 0.15s forwards;
+      animation: success ease-in 0.15s forwards;
+      animation-delay: 2.5s;
+    }
+  }
+  &-front {
+    transform: rotateY(0deg) translateZ($prism-length/2);
+  }
+  &-top {
+    height: $prism-depth;
+    transform: rotateX(90deg) translateZ($prism-depth/2);
+  }
+  &-back {
+    transform: rotateY(180deg) translateZ($prism-length/2);
+  }
+  &-right {
+    transform: rotateY(90deg) translateZ($prism-length/2);
+  }
+  &-left {
+    transform: rotateY(-90deg) translateZ($prism-length/2);
+  }
+  &-bottom {
+    height: $prism-depth;
+    transform: rotateX(-90deg) translateZ($prism-height - ($prism-depth/2));
+  }
+}
+
+.help-message {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-medium);
+  text-align: center;
+  color: var(--dark-blue);
+  cursor: pointer;
+
+  span:first-child {
+    margin-top: 1.5rem;
+  }
+  span:not(:first-child) {
+    margin: 0.5rem 0;
+  }
+}
+
+@keyframes success {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0) scale(0);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+  }
+}

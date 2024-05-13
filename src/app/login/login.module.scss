@@ -1,12 +1,55 @@
 .container {
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 
 .card {
   width: calc(100vw - 40px);
   border-radius: 8px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
+  margin: 2rem;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 3rem);
+}
+
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+  .card {
+    justify-content: center;
+  }
+
+  .content {
+    animation: responsive 0.7s ease-in-out;
+  }
+
+  .slider {
+    animation: responsive-remove-el 0.1s ease-in-out forwards;
+  }
+}
+
+@keyframes responsive-remove-el {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes responsive {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }

@@ -1,0 +1,23 @@
+.btn {
+  appearance: none;
+  cursor: pointer;
+  width: 100%;
+  line-height: 2em;
+  border-radius: 3px;
+  margin-top: 1.5rem;
+  padding: 0.25rem;
+  text-transform: uppercase;
+
+  &-primary {
+    background: var(--primary);
+    color: var(--light-blue);
+    border: 1px solid var(--primary);
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    transform: scale(0.96);
+  }
+}
