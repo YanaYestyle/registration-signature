@@ -2,9 +2,11 @@
 import { ReactNode, useEffect } from "react";
 import "./form-login.scss";
 import Form from "../form/form";
-import { useFormContext } from "../form-data-provider/form-data-provider";
+import { useFormContext } from "@/app/login/form-data-provider";
+import { useAppSelector } from "@/app/hooks/store-hook";
 
 export default function FormLogin({ children }: { children?: ReactNode }) {
+  const user = useAppSelector((state) => state.user);
   const getPrismElement = () => {
     return document.querySelector<HTMLDivElement>(".prism-wrapper");
   };
@@ -53,8 +55,7 @@ export default function FormLogin({ children }: { children?: ReactNode }) {
                 formSchema={{
                   ...formContext.formSchemaSignIn,
                   onClick: () => {
-                    formContext.formSchemaSignIn.onClick &&
-                      formContext.formSchemaSignIn.onClick();
+                    if (!user.user?.valid) return;
                     showThankYou();
                   },
                 }}

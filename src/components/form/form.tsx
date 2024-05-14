@@ -14,10 +14,10 @@ export default function Form(props: { formSchema: FormSchema<Object> }) {
         {(formik) => {
           return (
             <FormContainer>
-              {props.formSchema.formConfig.map((key) => (
-                //TODO: create unique ID
+              {props.formSchema.formConfig.map((key, index) => (
                 <FormControl
-                  key={key.name}
+                  key={index}
+                  id={key.id}
                   control={key.control}
                   type={key.inputType}
                   label={key.label ? key.label : key.name}

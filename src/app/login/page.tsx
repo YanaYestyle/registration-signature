@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import Slider from "@/components/slider/slider";
 import login from "./login.module.scss";
-import { imageList } from "./imageList";
+import { imageList } from "./image-list";
 import FormLogin from "@/components/form-login/form-login";
 import Button from "@/components/button/button";
-import { FormProvider } from "@/components/form-data-provider/form-data-provider";
+import { FormProvider } from "@/app/login/form-data-provider";
 import { useRouter } from "next/navigation";
 
 export default function Login() {

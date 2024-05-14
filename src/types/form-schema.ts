@@ -3,7 +3,7 @@ export type FormSchema<T> = {
   initialValues: T;
   validationSchema: any;
   onSubmit: (key: any) => any;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export type FormConfig = {
@@ -11,6 +11,7 @@ export type FormConfig = {
   control: Control;
   inputType: InputType;
   label?: string;
+  id?: string
 };
 
 export type Control = "input";
