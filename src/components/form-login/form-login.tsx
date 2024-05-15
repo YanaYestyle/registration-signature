@@ -1,12 +1,15 @@
 "use client";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import "./form-login.scss";
 import Form from "../form/form";
 import { useFormContext } from "@/app/login/form-data-provider";
 import { useAppSelector } from "@/app/hooks/store-hook";
+import { useDialog } from "../dialog/dialog-provider";
 
-export default function FormLogin({ children }: { children?: ReactNode }) {
+export default function FormLogin({ children }: { children?: ReactNode[] }) {
   const user = useAppSelector((state) => state.user);
+  const { openDialog } = useDialog();
+
   const getPrismElement = () => {
     return document.querySelector<HTMLDivElement>(".prism-wrapper");
   };
@@ -26,11 +29,11 @@ export default function FormLogin({ children }: { children?: ReactNode }) {
     transformPrism("translateZ(-100px) rotateX(90deg)");
   };
 
-  const showSignup = () => {
+  const showSignUp = () => {
     transformPrism("translateZ(-100px) rotateY(-90deg)");
   };
 
-  const showLogin = () => {
+  const showSignIn = () => {
     transformPrism("translateZ(-100px)");
   };
 
@@ -40,6 +43,10 @@ export default function FormLogin({ children }: { children?: ReactNode }) {
 
   const formContext = useFormContext();
 
+  if (user.user?.valid) {
+    showThankYou();
+  }
+
   return (
     <>
       <div className="form-login-wrapper">
@@ -47,7 +54,10 @@ export default function FormLogin({ children }: { children?: ReactNode }) {
           <div className="face face-top"></div>
           <div className="face face-front">
             <div className="form-login-content">
-              {children}
+              {children &&
+                children.map((child, index) => (
+                  <div key={index}>{index === 0 && child}</div>
+                ))}
               <h2 className="title-text">
                 Or <br /> Sign in to manage your journey
               </h2>
@@ -55,14 +65,14 @@ export default function FormLogin({ children }: { children?: ReactNode }) {
                 formSchema={{
                   ...formContext.formSchemaSignIn,
                   onClick: () => {
-                    if (!user.user?.valid) return;
-                    showThankYou();
+                    if (user.user.valid === false)
+                      openDialog("Incorrect password or login. Try again");
                   },
                 }}
               ></Form>
               <div className="help-message">
                 <span onClick={showForgotPassword}>Forgot password?</span>
-                <span onClick={showSignup}>Not a user? Sign up</span>
+                <span onClick={showSignUp}>Not a user? Sign up</span>
               </div>
             </div>
           </div>
@@ -105,13 +115,19 @@ export default function FormLogin({ children }: { children?: ReactNode }) {
                 }}
               ></Form>
               <div className="help-message">
-                <span onClick={showLogin}>Already a user? Sign in</span>
+                <span onClick={showSignIn}>Already a user? Sign in</span>
               </div>
             </div>
           </div>
           <div className="face face-left"></div>
           <div className="face face-bottom">
-            <div className="thank-you-msg">Thank you!</div>
+            <div className="thank-you-msg">
+              Thank you!
+              {children &&
+                children.map((child, index) => (
+                  <span key={index}>{index === 1 && child}</span>
+                ))}
+            </div>
           </div>
         </div>
       </div>

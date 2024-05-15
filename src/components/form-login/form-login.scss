@@ -1,8 +1,8 @@
 // Dimensions
-$prism-height: 550px;
-$prism-length: 350px;
+$prism-height: 450px;
+$prism-length: 300px;
 $prism-depth: $prism-length;
-$spacing: 20px;
+$spacing: 1rem;
 $br: 3px;
 
 .form-login-wrapper {
@@ -67,6 +67,11 @@ $br: 3px;
       -webkit-animation: success ease-in 0.15s forwards;
       animation: success ease-in 0.15s forwards;
       animation-delay: 2.5s;
+    }
+
+    span {
+      display: flex;
+      margin-top: 2rem;
     }
   }
   &-front {

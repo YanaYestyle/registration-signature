@@ -114,8 +114,8 @@ const FormContext = createContext(defaultFormSchema);
 
 export const FormProvider = ({ children }: { children: React.ReactNode }) => {
   const [defaultForm, setNewForm] = useState(defaultFormSchema);
-  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
 
   useEffect(() => {
     setNewForm({

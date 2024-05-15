@@ -12,6 +12,7 @@ export default function Login() {
   const goToReservation = () => {
     router.push("/reservation");
   };
+
   return (
     <>
       <div className={login.container}>
@@ -25,6 +26,7 @@ export default function Login() {
                   <br />
                   Choose your dream vacation
                 </Button>
+                <Button onClick={goToReservation}>OK</Button>
               </FormLogin>
             </FormProvider>
           </div>
