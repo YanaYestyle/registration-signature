@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { FormConfig, FormSchema } from "@/types/form-schema";
 import * as Yup from "yup";
-import { useAppSelector, useAppDispatch } from "../hooks/store-hook";
+import { useAppDispatch } from "../hooks/store-hook";
 import { fetchUser } from "./user-slice";
+import { useDialog } from "@/components/dialog/dialog-provider";
 
 const formConfigSignIn: FormConfig[] = [
   {
@@ -33,8 +34,6 @@ const formSchemaSignIn: FormSchema<Object> = {
       .email("Invalid email format")
       .required("Login is required"),
   }),
-  onSubmit: (values) => console.log(values),
-  onClick: () => console.log("ok"),
 };
 
 const formConfigSignUp: FormConfig[] = [
@@ -115,7 +114,7 @@ const FormContext = createContext(defaultFormSchema);
 export const FormProvider = ({ children }: { children: React.ReactNode }) => {
   const [defaultForm, setNewForm] = useState(defaultFormSchema);
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user);
+  const { openDialog } = useDialog();
 
   useEffect(() => {
     setNewForm({
@@ -126,7 +125,10 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
       formSchemaSignIn: {
         ...formSchemaSignIn,
         onSubmit: (values) => {
-          dispatch(fetchUser(values));
+          dispatch(fetchUser(values)).then((user) => {
+            if (user.payload.valid === false)
+              openDialog("Incorrect password or login. Try again");
+          });
         },
       },
       formSchemaSignUp: {

@@ -4,11 +4,9 @@ import "./form-login.scss";
 import Form from "../form/form";
 import { useFormContext } from "@/app/login/form-data-provider";
 import { useAppSelector } from "@/app/hooks/store-hook";
-import { useDialog } from "../dialog/dialog-provider";
 
 export default function FormLogin({ children }: { children?: ReactNode[] }) {
   const user = useAppSelector((state) => state.user);
-  const { openDialog } = useDialog();
 
   const getPrismElement = () => {
     return document.querySelector<HTMLDivElement>(".prism-wrapper");
@@ -62,13 +60,7 @@ export default function FormLogin({ children }: { children?: ReactNode[] }) {
                 Or <br /> Sign in to manage your journey
               </h2>
               <Form
-                formSchema={{
-                  ...formContext.formSchemaSignIn,
-                  onClick: () => {
-                    if (user.user.valid === false)
-                      openDialog("Incorrect password or login. Try again");
-                  },
-                }}
+                formSchema={formContext.formSchemaSignIn}
               ></Form>
               <div className="help-message">
                 <span onClick={showForgotPassword}>Forgot password?</span>

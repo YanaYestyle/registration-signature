@@ -32,10 +32,10 @@ const userSlice = createSlice({
         (state.user = action.payload), (state.error = "");
       }
     ),
-      builder.addCase(fetchUser.rejected, (state, action) => {
-        (state.user = {}),
-          (state.error = action.error.message || "Somthing is wrong");
-      });
+    builder.addCase(fetchUser.rejected, (state, action) => {
+      (state.user = {}),
+        (state.error = action.error.message || "Somthing is wrong");
+    });
   },
   reducers: {},
 });

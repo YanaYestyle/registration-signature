@@ -2,7 +2,7 @@ export type FormSchema<T> = {
   formConfig: FormConfig[];
   initialValues: T;
   validationSchema: any;
-  onSubmit: (key: any) => any;
+  onSubmit?: (key: any) => any;
   onClick?: () => void;
 };
 
