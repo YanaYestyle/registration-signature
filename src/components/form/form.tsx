@@ -9,7 +9,7 @@ export default function Form(props: { formSchema: FormSchema<Object> }) {
       <Formik
         initialValues={props.formSchema.initialValues}
         validationSchema={props.formSchema.validationSchema}
-        onSubmit={props.formSchema.onSubmit}
+        onSubmit={props.formSchema.onSubmit as any}
       >
         {(formik) => {
           return (

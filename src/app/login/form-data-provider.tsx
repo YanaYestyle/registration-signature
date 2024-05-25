@@ -2,8 +2,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FormConfig, FormSchema } from "@/types/form-schema";
 import * as Yup from "yup";
 import { useAppDispatch } from "../hooks/store-hook";
-import { fetchUser } from "./user-slice";
+import { fetchUser } from "./get-user";
 import { useDialog } from "@/components/dialog/dialog-provider";
+import { createUser } from "./new-user";
 
 const formConfigSignIn: FormConfig[] = [
   {
@@ -76,7 +77,6 @@ const formSchemaSignUp: FormSchema<Object> = {
       .oneOf([Yup.ref("password"), undefined], "Passwords have to match")
       .required("Please repeat your password"),
   }),
-  onSubmit: (values) => console.log(values),
 };
 
 const formConfigForgetPassword: FormConfig[] = [
@@ -133,6 +133,14 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
       },
       formSchemaSignUp: {
         ...formSchemaSignUp,
+        onSubmit: (values) => {
+          dispatch(createUser(values))
+            .then((user: any) => {
+              if (!user.payload)
+                openDialog("Incorrect password or login. Try again");
+            })
+            .catch((error) => console.log(error));
+        },
       },
     });
   }, []);

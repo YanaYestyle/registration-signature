@@ -7,6 +7,7 @@ import { useAppSelector } from "@/app/hooks/store-hook";
 
 export default function FormLogin({ children }: { children?: ReactNode[] }) {
   const user = useAppSelector((state) => state.user);
+  const newUser = useAppSelector((state) => state.newUser);
 
   const getPrismElement = () => {
     return document.querySelector<HTMLDivElement>(".prism-wrapper");
@@ -41,7 +42,7 @@ export default function FormLogin({ children }: { children?: ReactNode[] }) {
 
   const formContext = useFormContext();
 
-  if (user.user?.valid) {
+  if (user.user?.valid || (newUser.user?.email && newUser.user?.email)) {
     showThankYou();
   }
 
@@ -59,9 +60,7 @@ export default function FormLogin({ children }: { children?: ReactNode[] }) {
               <h2 className="title-text">
                 Or <br /> Sign in to manage your journey
               </h2>
-              <Form
-                formSchema={formContext.formSchemaSignIn}
-              ></Form>
+              <Form formSchema={formContext.formSchemaSignIn}></Form>
               <div className="help-message">
                 <span onClick={showForgotPassword}>Forgot password?</span>
                 <span onClick={showSignUp}>Not a user? Sign up</span>
@@ -96,16 +95,7 @@ export default function FormLogin({ children }: { children?: ReactNode[] }) {
                 <br />
                 Sign up to start
               </h2>
-              <Form
-                formSchema={{
-                  ...formContext.formSchemaSignUp,
-                  onClick: () => {
-                    formContext.formSchemaSignUp.onClick &&
-                      formContext.formSchemaSignUp.onClick();
-                    showThankYou();
-                  },
-                }}
-              ></Form>
+              <Form formSchema={formContext.formSchemaSignUp}></Form>
               <div className="help-message">
                 <span onClick={showSignIn}>Already a user? Sign in</span>
               </div>
